@@ -18,7 +18,7 @@ To use simply drag and drop animations onto the drop box or Click "Load Anims" a
 When importing anims make sure to names the files a-z in the order you want the anims merged, as the tool sorts them a-z to determine order. A future update will allow manual selection of anim order.
 
 ## Credits
-- DTZxPorter - SELibDotNet
+- DTZxPorter - [SELibDotNet](https://github.com/dtzxporter/SELibDotNet)
 
 ## Donations
 A lot of work goes into making and maintaining my applications including SEAnimMerger, while I will never charge for my apps, donations are highly appreciated to keep my alocohol consumption high:
