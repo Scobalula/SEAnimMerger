@@ -1,0 +1,23 @@
+﻿<Window x:Class="SEAnimMerger.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SEAnimMerger"
+        mc:Ignorable="d"
+        Title="SEAnim Merger" Height="384" Width="512" MinWidth="512" MinHeight="384" Foreground="{x:Null}" Background="{x:Null}">
+    <Grid Background="#FF1B1B1B">
+        <Border BorderBrush="White" BorderThickness="1" Margin="10,28,10,10">
+            <Label x:Name="DropLabel" Content="Drop SEAnims to Merge" FontSize="22" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="-1" AllowDrop="True" Drop="DropLabel_Drop"/>
+        </Border>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" Background="#FF252525">
+                <MenuItem Header="Load Anims" Foreground="White" Click="MenuItem_Click">
+                </MenuItem>
+                <MenuItem Header="About" Foreground="White" Click="MenuItem_Click_1">
+                </MenuItem>
+            </Menu>
+            <StackPanel></StackPanel>
+        </DockPanel>
+    </Grid>
+</Window>
