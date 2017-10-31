@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="SEAnim Merger" Height="384" Width="512" MinWidth="512" MinHeight="384" Foreground="{x:Null}" Background="{x:Null}">
     <Grid Background="#FF1B1B1B">
-        <Border BorderBrush="White" BorderThickness="1" Margin="10,28,10,10">
-            <Label x:Name="DropLabel" Content="Drop SEAnims to Merge" FontSize="22" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="-1" AllowDrop="True" Drop="DropLabel_Drop"/>
+        <Border BorderBrush="White" BorderThickness="1" Margin="10,28,10,47">
+            <Label x:Name="DropLabel" Content="Drop SEAnims to Merge" FontSize="22" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="-1" AllowDrop="True" Drop="DropLabel_Drop" ToolTip="Drop SEAnim Files here to merge them."/>
         </Border>
         <DockPanel>
             <Menu DockPanel.Dock="Top" Background="#FF252525">
@@ -17,7 +17,16 @@
                 <MenuItem Header="About" Foreground="White" Click="MenuItem_Click_1">
                 </MenuItem>
             </Menu>
-            <StackPanel></StackPanel>
+            <StackPanel>
+            </StackPanel>
         </DockPanel>
+        <ComboBox x:Name="AnimType" HorizontalAlignment="Left" Margin="82,0,0,8" VerticalAlignment="Bottom" Width="120" Height="26" SelectedIndex="0" Foreground="Black" Background="Black" BorderBrush="Black" ToolTip="The anim type of the merged SEAnim">
+            <ComboBoxItem Content="Absolute"/>
+            <ComboBoxItem Content="Additive"/>
+            <ComboBoxItem Content="Relative"/>
+            <ComboBoxItem Content="Delta"/>
+        </ComboBox>
+        <Label x:Name="label1" Content="Anim Type" HorizontalAlignment="Left" Margin="10,0,0,8" VerticalAlignment="Bottom" Width="72" Height="26" Background="{x:Null}" Foreground="White" ToolTip="The anim type of the merged SEAnim"/>
+
     </Grid>
 </Window>

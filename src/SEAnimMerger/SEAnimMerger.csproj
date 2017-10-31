@@ -45,7 +45,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="SELib">
-      <HintPath>..\..\..\..\..\Downloads\SELibReleasev1.4\SELib.dll</HintPath>
+      <HintPath>..\..\..\..\..\Downloads\SELib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

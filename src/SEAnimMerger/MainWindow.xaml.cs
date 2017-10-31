@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using Microsoft.Win32;
 using SELib;
+using SELib.Utilities;
 
 namespace SEAnimMerger
 {
@@ -12,12 +13,25 @@ namespace SEAnimMerger
     /// </summary>
     public partial class MainWindow : Window
     {
+        // Anim Types
+        public static Dictionary<string, AnimationType> AnimTypes = new Dictionary<string, AnimationType>()
+        {
+            {"Absolute", AnimationType.Absolute },
+            {"Additive", AnimationType.Additive },
+            {"Relative", AnimationType.Relative },
+            {"Delta", AnimationType.Delta },
+        };
         public MainWindow()
         {
             InitializeComponent();
         }
-        private static void MergeAnimations(string[] files)
+        private static void MergeAnimations(string[] files, string AnimType)
         {
+            if(files.Length < 2)
+            {
+                MessageBox.Show("Atleast 2 Anims are required for merging.", "Error");
+                return;
+            }
             // Save new SEAnim
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "SEanim File (*.SEANIM)|*.seanim";
@@ -30,10 +44,12 @@ namespace SEAnimMerger
                 anims.Sort();
                 // Merged Anim
                 SEAnim merged = new SEAnim();
-                // Absolute Animation
-                merged.AnimType = AnimationType.Absolute;
+                // Anim type
+                merged.AnimType = AnimTypes[AnimType];
                 // Next Start frame for appending next anim
                 int next_start_frame = 0;
+                // Anims Merged
+                int anims_merged = 0;
                 // Add each file's data to new SEAnim
                 foreach (string file in anims)
                 {
@@ -81,14 +97,20 @@ namespace SEAnimMerger
                                     merged.AddNoteTrack(Notetrack.Key, next_start_frame + NoteFrame.Frame);
                         }
                         next_start_frame += anim.FrameCount;
+                        anims_merged++;
                     }
+                }
+                if (anims_merged < 2)
+                {
+                    MessageBox.Show("Atleast 2 Anims are required for merged.", "Error");
+                    return;
                 }
                 // Write new SEAnim
                 merged.Write(saveFileDialog.FileName);
                 // Stop watch
                 watch.Stop();
                 float finishtime = watch.ElapsedMilliseconds;
-                MessageBox.Show(string.Format("Merged {0} SEAnims in {1} Seconds", anims.Count, finishtime / 1000.000));
+                MessageBox.Show(string.Format("Merged {0} SEAnims in {1} Seconds", anims_merged, finishtime / 1000.000));
             }
         }
         private void DropLabel_Drop(object sender, DragEventArgs dropped_files)
@@ -98,7 +120,7 @@ namespace SEAnimMerger
                 string[] dropped = (string[])dropped_files.Data.GetData(DataFormats.FileDrop);
                 try
                 {
-                    MergeAnimations(dropped);
+                    MergeAnimations(dropped, AnimType.SelectedItem.ToString().Replace("System.Windows.Controls.ComboBoxItem: ", ""));
                 }
                 catch(Exception error)
                 {
@@ -115,7 +137,14 @@ namespace SEAnimMerger
             openFileDialog.Multiselect = true;
             if(openFileDialog.ShowDialog() == true)
             {
-                MergeAnimations(openFileDialog.FileNames);
+                try
+                {
+                    MergeAnimations(openFileDialog.FileNames, AnimType.SelectedItem.ToString());
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(string.Format("Unhandled Exception occured while merging:\n\n{0}", error));
+                }
             }
 
         }
